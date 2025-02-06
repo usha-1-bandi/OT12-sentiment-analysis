@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis - ChatGPT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            background-color: #2e3d49;
+            color: white;
+            padding: 20px;
+        }
+
+        .login-form, .home-content {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 50px auto;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e3d49;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: #1a252f;
+        }
+
+        .home-content h2 {
+            text-align: center;
+        }
+
+        .sentiment-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+
+        .sentiment-result {
+            text-align: center;
+            padding: 15px;
+            background-color: #e0f7fa;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ChatGPT Sentiment Analysis</h1>
+</header>
+
+<!-- Login Page -->
+<div id="login-page" class="container">
+    <div class="login-form">
+        <h2>Login to Your Account</h2>
+        <form onsubmit="return handleLogin(event)">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="error-message" style="color:red; display:none;">Invalid credentials. Please try again.</p>
+    </div>
+</div>
+
+<!-- Home Page (Hidden initially) -->
+<div id="home-page" class="container" style="display: none;">
+    <div class="home-content">
+        <h2>Welcome to the Sentiment Analysis Tool</h2>
+        <textarea class="sentiment-input" id="userInput" rows="5" placeholder="Type your text here for sentiment analysis..."></textarea>
+        <button onclick="analyzeSentiment()">Analyze Sentiment</button>
+        
+        <div id="sentimentResult" class="sentiment-result" style="display: none;">
+            <h3>Sentiment Result:</h3>
+            <p id="resultText"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Handle login functionality (For simplicity, we're using a static login check here)
+    function handleLogin(event) {
+        event.preventDefault();  // Prevent form submission
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Simple username and password check (change this logic based on your backend)
+        if (username === 'user' && password === 'password') {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('home-page').style.display = 'block';
+        } else {
+            document.getElementById('error-message').style.display = 'block';
+        }
+    }
+
+    // Dummy sentiment analysis function
+    function analyzeSentiment() {
+        const userInput = document.getElementById('userInput').value;
+
+        if (userInput.trim() === "") {
+            alert("Please enter some text for analysis.");
+            return;
+        }
+
+        // Simulating sentiment analysis (you'd replace this with actual API logic)
+        const sentiment = userInput.toLowerCase().includes("good") ? "Positive" : "Negative";
+
+        document.getElementById('sentimentResult').style.display = 'block';
+        document.getElementById('resultText').textContent = `The sentiment of your text is: ${sentiment}`;
+    }
+</script>
+
+</body>
+</html>
